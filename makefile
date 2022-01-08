@@ -20,10 +20,12 @@ CFLAGS = \
 	-DVERSION_PATCH=${VERSION_PATCH}\
 	-g
 
-compile: ${BIN}
+compile: ./bin ${BIN}
+
+./bin:
+	mkdir -p bin
 
 ${BIN}: bin/% : src/%.c ${DEPS} ${SPECIAL}
-	mkdir -p bin
 	${CC} ${CFLAGS} -o $@ $< ${SPECIAL}
 
 clean:
