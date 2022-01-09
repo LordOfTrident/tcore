@@ -1,11 +1,12 @@
 #include <stdio.h> /* printf, fprintf, puts */
 #include <string.h> /* strcmp */
 #include <unistd.h> /* getcwd */
-#include <linux/limits.h> /* PATH_MAX */
 #include <stdlib.h> /* EXIT_SUCCESS, EXIT_FAILURE */
 
 #include "info.h"
 #include "error.h"
+
+#define PATH_MAX 4096
 
 #define PROGRAM_NAME "pwd"
 #define PROGRAM_DESC "Output the path of the current working directory."

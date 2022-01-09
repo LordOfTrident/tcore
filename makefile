@@ -4,8 +4,8 @@ DEPS = ${wildcard src/*.h}
 BIN  = ${subst src/,bin/,${basename ${SRC}}}
 
 VERSION_MAJOR = 2
-VERSION_MINOR = 6
-VERSION_PATCH = 9
+VERSION_MINOR = 7
+VERSION_PATCH = 0
 
 CC = cc
 CVER = c99
