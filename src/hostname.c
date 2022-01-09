@@ -46,31 +46,23 @@ int main(int p_argc, const char **p_argv) {
 	}
 	ERR_WATCH_INIT;
 
-	if (p_argc > 1) {
-		if (strcmp(p_argv[1], "-s") == 0) {
-			if (p_argc < 3) {
-				ERR_SET_G_ERROR("Missing argument", NULL, ERR_NOT_FATAL);
-				error_simple(PROGRAM_NAME);
-				return EXIT_FAILURE;
-			}
-
-			if (sethostname(p_argv[2], strlen(p_argv[2])) != 0) {
-				ERR_SET_G_ERROR("sethostname fail", strerror(errno), ERR_FATAL);
-				error_fatal(PROGRAM_NAME);
-			}
-		} else {
-			ERR_SET_G_ERROR(p_argv[1], "Extra argument", ERR_NOT_FATAL);
-			error_simple(PROGRAM_NAME);
-			return EXIT_FAILURE;
+	if (p_argc == 2) {
+		if (sethostname(p_argv[2], strlen(p_argv[2])) != 0) {
+			ERR_SET_G_ERROR("sethostname fail", strerror(errno), ERR_FATAL);
+			error_fatal(PROGRAM_NAME);
 		}
+	} else if (p_argc == 1) {
+		char hostname[HOST_NAME_MAX] = {0};
+		if (gethostname(hostname, HOST_NAME_MAX - 1) != 0) {
+			ERR_SET_G_ERROR("gethostname fail", strerror(errno), ERR_FATAL);
+			error_fatal(PROGRAM_NAME);
+		}
+		puts(hostname);
+	} else {
+		ERR_SET_G_ERROR(p_argv[2], "Extra argument", ERR_NOT_FATAL);
+		error_simple(PROGRAM_NAME);
+		return EXIT_FAILURE;
 	}
-
-	char hostname[HOST_NAME_MAX] = {0};
-	if (gethostname(hostname, HOST_NAME_MAX - 1) != 0) {
-		ERR_SET_G_ERROR("gethostname fail", strerror(errno), ERR_FATAL);
-		error_fatal(PROGRAM_NAME);
-	}
-	puts(hostname);
 
 	return EXIT_SUCCESS;
 }

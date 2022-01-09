@@ -55,4 +55,4 @@ some of the programs are mostly POSIX compliant while others not at all.
 All of the programs recognise `--help` and `--version` arguments. Usage for each program is under the `--help` argument.
 
 ## Make
-Run `make all` to see all the make rules
+Run `make all` to see all the make rules.

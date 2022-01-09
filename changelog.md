@@ -32,3 +32,4 @@ All the versions and the changes they bring
 - `2.6.8`: added util.h (strclone) - now cloning string parameters
 - `2.6.9`: adding usage help to each program
 - `2.7.0`: linux/limits.h is a problematic header. defined PATH_MAX in pwd.c as 4096
+- `2.7.1`: hostname fix for setting the hostname
