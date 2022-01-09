@@ -47,7 +47,7 @@ int main(int p_argc, const char **p_argv) {
 	ERR_WATCH_INIT;
 
 	if (p_argc == 2) {
-		if (sethostname(p_argv[2], strlen(p_argv[2])) != 0) {
+		if (sethostname(p_argv[1], strlen(p_argv[1])) != 0) {
 			ERR_SET_G_ERROR("sethostname fail", strerror(errno), ERR_FATAL);
 			error_fatal(PROGRAM_NAME);
 		}
