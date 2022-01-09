@@ -48,8 +48,10 @@ int main(int p_argc, const char **p_argv) {
 
 	if (p_argc == 2) {
 		if (sethostname(p_argv[1], strlen(p_argv[1])) != 0) {
-			ERR_SET_G_ERROR("sethostname fail", strerror(errno), ERR_FATAL);
-			error_fatal(PROGRAM_NAME);
+			ERR_SET_G_ERROR("sethostname", strerror(errno), ERR_NOT_FATAL);
+			error_simple(PROGRAM_NAME);
+			error_cleanup();
+			return EXIT_FAILURE;
 		}
 	} else if (p_argc == 1) {
 		char hostname[HOST_NAME_MAX] = {0};
@@ -61,6 +63,7 @@ int main(int p_argc, const char **p_argv) {
 	} else {
 		ERR_SET_G_ERROR(p_argv[2], "Extra argument", ERR_NOT_FATAL);
 		error_simple(PROGRAM_NAME);
+		error_cleanup();
 		return EXIT_FAILURE;
 	}
 

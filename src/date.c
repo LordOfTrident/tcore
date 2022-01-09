@@ -50,6 +50,7 @@ int main(int p_argc, const char **p_argv) {
 	ERR_WATCH; if (p_argc > 1) {
 		ERR_SET_G_ERROR(p_argv[1], "Extra argument", ERR_NOT_FATAL);
 		error_simple(PROGRAM_NAME);
+		error_cleanup();
 		return EXIT_FAILURE;
 	}
 

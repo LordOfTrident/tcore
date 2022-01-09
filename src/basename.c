@@ -81,6 +81,7 @@ int main(int p_argc, char **p_argv) {
 	if (p_argc < 2) {
 		ERR_SET_G_ERROR("Missing argument", NULL, ERR_NOT_FATAL);
 		error_simple(PROGRAM_NAME);
+		error_cleanup();
 		try(PROGRAM_NAME);
 		return EXIT_FAILURE;
 	}
@@ -92,6 +93,7 @@ int main(int p_argc, char **p_argv) {
 		if (p_argc < 4) {
 			ERR_SET_G_ERROR("Missing argument", NULL, ERR_NOT_FATAL);
 			error_simple(PROGRAM_NAME);
+			error_cleanup();
 			try(PROGRAM_NAME);
 			return EXIT_FAILURE;
 		}
@@ -105,6 +107,7 @@ int main(int p_argc, char **p_argv) {
 		if (p_argc < 3) {
 			ERR_SET_G_ERROR("Missing argument", NULL, ERR_NOT_FATAL);
 			error_simple(PROGRAM_NAME);
+			error_cleanup();
 			try(PROGRAM_NAME);
 			return EXIT_FAILURE;
 		}
@@ -128,6 +131,7 @@ int main(int p_argc, char **p_argv) {
 			else {
 				ERR_SET_G_ERROR(p_argv[2], "Extra argument", ERR_NOT_FATAL);
 				error_simple(PROGRAM_NAME);
+				error_cleanup();
 				return EXIT_FAILURE;
 			}
 		}

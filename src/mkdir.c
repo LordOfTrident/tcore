@@ -115,12 +115,14 @@ int main(int p_argc, const char **p_argv) {
 		if (fix) {
 			ERR_WATCH; if (fix_path(*p_argv, 0777) != EXIT_SUCCESS) {
 				error_simple(PROGRAM_NAME);
+				error_cleanup();
 				exitcode = EXIT_FAILURE;
 			}
 		} else {
 			ERR_WATCH; if (mkdir(*p_argv, 0777) != 0) {
 				ERR_SET_G_ERROR(*p_argv, strerror(errno), ERR_NOT_FATAL);
 				error_simple(PROGRAM_NAME);
+				error_cleanup();
 				exitcode = EXIT_FAILURE;
 			}
 		}

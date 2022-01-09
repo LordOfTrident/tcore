@@ -120,6 +120,7 @@ int main(int p_argc, const char **p_argv) {
 					error_fatal(PROGRAM_NAME);
 				else {
 					error_simple(PROGRAM_NAME);
+					error_cleanup();
 					exitcode = EXIT_FAILURE;
 				}
 			} else {

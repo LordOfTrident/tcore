@@ -26,6 +26,7 @@ int main(int p_argc, const char **p_argv) {
 		ERR_WATCH; if (unlink(*p_argv) != 0) {
 			ERR_SET_G_ERROR(*p_argv, strerror(errno), ERR_NOT_FATAL);
 			error_simple(PROGRAM_NAME);
+			error_cleanup();
 			exitcode = EXIT_FAILURE;
 		}
 	}
