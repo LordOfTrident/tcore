@@ -3,7 +3,7 @@
 #include <string.h> /* strcmp */
 #include <stdlib.h> /* malloc, free, EXIT_SUCCESS, EXIT_FAILURE */
 #include <sys/stat.h> /* stat, S_ISDIR */
-#include <errno.h> /* errono, strerror */
+#include <errno.h> /* errno, strerror */
 
 #include "info.h"
 #include "error.h"
@@ -12,10 +12,11 @@
 #define CHUNK_SIZE 4
 
 #define PROGRAM_NAME "cat"
-#define PROGRAM_DESC "Exit with an exit code indicating success."
+#define PROGRAM_DESC "Output a file into the standard output. If no files are\n"\
+                     "specified, read standard input."
 
 const char *usages[] = {
-	"[IGNORED_ARGS...]"
+	"[FILE...]"
 };
 
 t_arg_desc arg_desc[] = {
@@ -86,7 +87,8 @@ int main(int p_argc, const char **p_argv) {
 
 		char ch;
 		while ((ch = getchar()) != EOF) {
-			if (len + 1 > chunk_size) {
+			++ len;
+			if (len > chunk_size) {
 				chunk_size *= 2;
 				void *tmp = erealloc(buf, chunk_size);
 				if (buf == NULL) {
@@ -96,7 +98,7 @@ int main(int p_argc, const char **p_argv) {
 				buf = tmp;
 			}
 
-			buf[len ++] = ch;
+			buf[len - 1] = ch;
 			if (ch == '\n') {
 				buf[len] = '\0';
 				fputs(buf, stdout);

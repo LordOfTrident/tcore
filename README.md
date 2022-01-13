@@ -50,6 +50,7 @@ some of the programs are mostly POSIX compliant while others not at all.
 - true
 - uptime
 - yes
+- align
 
 ## Usage
 All of the programs recognise `--help` and `--version` arguments. Usage for each program is under the `--help` argument.
