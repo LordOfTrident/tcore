@@ -22,8 +22,8 @@
 * [Make](#make)
 
 ## Introduction
-Trident core utilities - contains some basic commands for unix systems like `echo` and `ls`. I made this to practice C some more.
-some of the programs are mostly POSIX compliant while others not at all.
+Trident core utilities - contains some basic commands for unix and linux systems like `echo` and `ls`. I made this to
+practice C some more. some of the programs are mostly POSIX compliant while others not at all.
 
 ## Commands
 - askdo
