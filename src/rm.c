@@ -74,9 +74,9 @@ int main(int p_argc, const char **p_argv) {
 			if (
 				help(
 					PROGRAM_NAME,
-					usages, sizeof(g_usages) / sizeof(const char*),
+					g_usages, sizeof(g_usages) / sizeof(const char*),
 					PROGRAM_DESC,
-					arg_desc, sizeof(g_arg_desc) / sizeof(t_arg_desc)
+					g_arg_desc, sizeof(g_arg_desc) / sizeof(t_arg_desc)
 				) != EXIT_SUCCESS
 			)
 				error_fatal(PROGRAM_NAME);

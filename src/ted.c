@@ -17,7 +17,7 @@
 #define CURFOR(p_amount)  printf("\033[%dC", (p_amount))
 #define CURBACK(p_amount) printf("\033[%dD", (p_amount))
 
-#define CTRL(key) (key & 0x1f)
+#define CTRL_PLUS(key) (key & 0x1f)
 
 /* keys */
 #define KEY_ESCAPE    0x001b
@@ -31,11 +31,11 @@
 #define PROGRAM_NAME "ted"
 #define PROGRAM_DESC "Simple file reader and writer."
 
-const char *usages[] = {
+const char *g_usages[] = {
 	"FILE [-r | -w [TEXT]]"
 };
 
-t_arg_desc arg_desc[] = {
+t_arg_desc g_arg_desc[] = {
 	{"--help",    "Show command help"},
 	{"--version", "Show tcore version"},
 	{"--seqs",    "Show the escape sequences"},
@@ -219,7 +219,7 @@ int start(bool p_read, bool p_write, char *p_wcontent, const char *p_path) {
 				}
 
 				switch (in) {
-				case CTRL('c'):
+				case CTRL_PLUS('c'):
 					loop = false;
 					save = false;
 					putchar('\n');
@@ -374,9 +374,9 @@ int main(int p_argc, const char **p_argv) {
 			if (
 				help(
 					PROGRAM_NAME,
-					usages, sizeof(usages) / sizeof(const char*),
+					g_usages, sizeof(g_usages) / sizeof(const char*),
 					PROGRAM_DESC,
-					arg_desc, sizeof(arg_desc) / sizeof(t_arg_desc)
+					g_arg_desc, sizeof(g_arg_desc) / sizeof(t_arg_desc)
 				) != EXIT_SUCCESS
 			)
 				error_fatal(PROGRAM_NAME);

@@ -15,12 +15,12 @@
 #define PROGRAM_NAME "kill"
 #define PROGRAM_DESC "Send a signal to a process. Default signal is SIGTERM."
 
-const char *usages[] = {
+const char *g_usages[] = {
 	"[-s SIGNAL | -n SIGNUM] PID...",
 	"-l [SIGNAL... | SIGNUM...]"
 };
 
-t_arg_desc arg_desc[] = {
+t_arg_desc g_arg_desc[] = {
 	{"--help",    "Show command help"},
 	{"--version", "Show tcore version"},
 	{"-l",        "List all the signal names and their numbers;\n"
@@ -135,9 +135,9 @@ int main(int p_argc, char **p_argv) {
 			if (
 				help(
 					PROGRAM_NAME,
-					usages, sizeof(usages) / sizeof(const char*),
+					g_usages, sizeof(g_usages) / sizeof(const char*),
 					PROGRAM_DESC,
-					arg_desc, sizeof(arg_desc) / sizeof(t_arg_desc)
+					g_arg_desc, sizeof(g_arg_desc) / sizeof(t_arg_desc)
 				) != EXIT_SUCCESS
 			)
 				error_fatal(PROGRAM_NAME);

@@ -10,11 +10,11 @@
 #define PROGRAM_NAME "hexdump"
 #define PROGRAM_DESC "Output file bytes in hexadecimal"
 
-const char *usages[] = {
+const char *g_usages[] = {
 	"FILES..."
 };
 
-t_arg_desc arg_desc[] = {
+t_arg_desc g_arg_desc[] = {
 	{"--help",    "Show command help"},
 	{"--version", "Show tcore version"}
 };
@@ -56,9 +56,9 @@ int main(int p_argc, const char **p_argv) {
 			if (
 				help(
 					PROGRAM_NAME,
-					usages, sizeof(usages) / sizeof(const char*),
+					g_usages, sizeof(g_usages) / sizeof(const char*),
 					PROGRAM_DESC,
-					arg_desc, sizeof(arg_desc) / sizeof(t_arg_desc)
+					g_arg_desc, sizeof(g_arg_desc) / sizeof(t_arg_desc)
 				) != EXIT_SUCCESS
 			)
 				error_fatal(PROGRAM_NAME);

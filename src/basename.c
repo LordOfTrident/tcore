@@ -10,12 +10,12 @@
 #define PROGRAM_DESC "Print name without any directories.\nIf suffix is specified," \
                      "remove it too."
 
-const char *usages[] = {
+const char *g_usages[] = {
 	"NAME [SUFFIX]",
 	"[-s SUFFIX] -a NAME... | NAME",
 };
 
-t_arg_desc arg_desc[] = {
+t_arg_desc g_arg_desc[] = {
 	{"--help",    "Show command help"},
 	{"--version", "Show tcore version"},
 	{"-s SUFFIX", "Suffix to remove"},
@@ -66,9 +66,9 @@ int main(int p_argc, char **p_argv) {
 			if (
 				help(
 					PROGRAM_NAME,
-					usages, sizeof(usages) / sizeof(const char*),
+					g_usages, sizeof(g_usages) / sizeof(const char*),
 					PROGRAM_DESC,
-					arg_desc, sizeof(arg_desc) / sizeof(t_arg_desc)
+					g_arg_desc, sizeof(g_arg_desc) / sizeof(t_arg_desc)
 				) != EXIT_SUCCESS
 			)
 				error_fatal(PROGRAM_NAME);
