@@ -17,8 +17,7 @@ CFLAGS = \
 	-Wno-deprecated-declarations\
 	-DVERSION_MAJOR=${VERSION_MAJOR}\
 	-DVERSION_MINOR=${VERSION_MINOR}\
-	-DVERSION_PATCH=${VERSION_PATCH}\
-	-g
+	-DVERSION_PATCH=${VERSION_PATCH}
 
 compile: ./bin ${BIN}
 
@@ -31,10 +30,6 @@ ${BIN}: bin/% : src/%.c ${DEPS} ${SPECIAL}
 clean:
 	rm ${BIN}
 
-install: ${BIN}
-
-
 all:
 	@echo compile
 	@echo clean
-	@echo install
