@@ -1,8 +1,6 @@
-#include <stdio.h> /* printf, fputs, fprintf, fseek, fopen, fclose, FILE, stdout
-                      size_t */
+#include <stdio.h> /* printf, fputs, fprintf, stdout, size_t */
 #include <string.h> /* strcmp */
 #include <stdlib.h> /* malloc, free, EXIT_SUCCESS, EXIT_FAILURE */
-#include <sys/stat.h> /* stat, S_ISDIR */
 #include <errno.h> /* errno, strerror */
 
 #include "info.h"
@@ -15,47 +13,14 @@
 #define PROGRAM_DESC "Output a file into the standard output. If no files are\n"\
                      "specified, read standard input."
 
-const char *usages[] = {
+const char *g_usages[] = {
 	"[FILE...]"
 };
 
-t_arg_desc arg_desc[] = {
+t_arg_desc g_arg_desc[] = {
 	{"--help",    "Show command help"},
 	{"--version", "Show tcore version"}
 };
-
-char *read_file(const char *p_path) {
-	ERR_WATCH_INIT;
-	ERR_WATCH; FILE *fhnd = fopen(p_path, "r");
-	if (fhnd == NULL) {
-		ERR_SET_G_ERROR(p_path, strerror(errno), ERR_NOT_FATAL);
-		return NULL;
-	}
-
-	struct stat entstat;
-	if (stat(p_path, &entstat) == 0) {
-		if (S_ISDIR(entstat.st_mode) != 0) {
-			ERR_SET_G_ERROR(p_path, "Is a directory", ERR_NOT_FATAL);
-			return NULL;
-		}
-	} else {
-		ERR_SET_G_ERROR(p_path, strerror(errno), ERR_FATAL);
-		return NULL;
-	}
-
-	fseek(fhnd, 0, SEEK_END);
-	size_t fsize = ftell(fhnd);
-	fseek(fhnd, 0, SEEK_SET);
-
-	ERR_WATCH; char* fcontent = (char*)emalloc(fsize + 1);
-	if (fcontent == NULL)
-		return NULL;
-	for (char *p = fcontent; (*p = getc(fhnd)) != EOF; ++ p);
-	fcontent[fsize] = '\0';
-
-	fclose(fhnd);
-	return fcontent;
-}
 
 int main(int p_argc, const char **p_argv) {
 	if (p_argc == 2) {
@@ -66,9 +31,9 @@ int main(int p_argc, const char **p_argv) {
 			if (
 				help(
 					PROGRAM_NAME,
-					usages, sizeof(usages) / sizeof(const char*),
+					usages, sizeof(g_usages) / sizeof(const char*),
 					PROGRAM_DESC,
-					arg_desc, sizeof(arg_desc) / sizeof(t_arg_desc)
+					arg_desc, sizeof(g_arg_desc) / sizeof(t_arg_desc)
 				) != EXIT_SUCCESS
 			)
 				error_fatal(PROGRAM_NAME);
@@ -123,6 +88,7 @@ int main(int p_argc, const char **p_argv) {
 				else {
 					error_simple(PROGRAM_NAME);
 					error_cleanup();
+					try(PROGRAM_NAME);
 					exitcode = EXIT_FAILURE;
 				}
 			} else {

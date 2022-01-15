@@ -36,3 +36,7 @@ All the versions and the changes they bring
 - `2.7.2`: eliminated noticed memory leaks
 - `2.8.2`: align added
 - `2.8.3`: cat help description fixed
+- `2.8.4`: moved read_file to utils.c
+- `2.8.5`: moved fputse to utils.c
+- `2.8.6`: added write_file to utils.c
+- `2.9.6`: ted added

@@ -1,5 +1,5 @@
-#include <stdio.h> /* printf, fputs, fputc, putchar, stdout */
-#include <string.h> /* strcmp, strchr */
+#include <stdio.h> /* printf, putchar, stdout */
+#include <string.h> /* strcmp */
 #include <stdlib.h> /* EXIT_SUCCESS, EXIT_FAILURE, strtol */
 #include <stdbool.h> /* bool, true, false */
 #include <ctype.h> /* isdigit */
@@ -10,11 +10,11 @@
 #define PROGRAM_NAME "echo"
 #define PROGRAM_DESC "Output the string to standard output."
 
-const char *usages[] = {
+const char *g_usages[] = {
 	"[-n | -e] [STRING...]"
 };
 
-t_arg_desc arg_desc[] = {
+t_arg_desc g_arg_desc[] = {
 	{"--help",    "Show command help"},
 	{"--version", "Show tcore version"},
 	{"--seqs",    "Show the escape sequences"},
@@ -25,7 +25,7 @@ t_arg_desc arg_desc[] = {
 #define PROGRAM_SEQS_DESC "If any other character is after a backslash, it will\n" \
                           "be ignored and the backslash will be printed."
 
-t_arg_desc seq_desc[] = {
+t_arg_desc g_seq_desc[] = {
 	{"\\\\",   "Backslash"},
 	{"\\a",    "Alert"},
 	{"\\b",    "Backspace"},
@@ -39,48 +39,6 @@ t_arg_desc seq_desc[] = {
 	{"\\0NNN", "Octal number (1 to 3 digits)"}
 };
 
-bool fputse(char *p_str, FILE *p_stream) {
-	char *tmp = p_str;
-	while ((tmp = strchr(tmp, '\\')) != NULL) {
-		*tmp = '\0';
-		fputs(p_str, p_stream);
-		switch (tmp[1]) {
-		case 'a':  fputc('\a', stdout); break;
-		case 'b':  fputc('\b', stdout); break;
-		case 'f':  fputc('\f', stdout); break;
-		case 'n':  fputc('\n', stdout); break;
-		case 'r':  fputc('\r', stdout); break;
-		case 't':  fputc('\t', stdout); break;
-		case 'v':  fputc('\v', stdout); break;
-		case '\\': fputc('\\', stdout); break;
-		case 'c': return false; break;
-		case '0': {
-				char num[5] = {0};
-				tmp += 2;
-				for (int i = 0; *tmp >= '0' && *tmp <= '7' && i < 3; ++ i, ++ tmp)
-					num[i] = *tmp;
-				fputc(strtol(num, NULL, 8), stdout);
-
-				p_str = tmp;
-				continue;
-			}
-			break;
-		default:
-			putchar('\\');
-
-			++ tmp;
-			p_str = tmp;
-			continue;
-		}
-
-		tmp += 2;
-		p_str = tmp;
-	}
-	fputs(p_str, p_stream);
-
-	return true;
-}
-
 int main(int p_argc, char **p_argv) {
 	if (p_argc == 2) {
 		if (strcmp(p_argv[1], "--version") == 0) {
@@ -90,9 +48,9 @@ int main(int p_argc, char **p_argv) {
 			if (
 				help(
 					PROGRAM_NAME,
-					usages, sizeof(usages) / sizeof(const char*),
+					usages, sizeof(g_usages) / sizeof(const char*),
 					PROGRAM_DESC,
-					arg_desc, sizeof(arg_desc) / sizeof(t_arg_desc)
+					arg_desc, sizeof(g_arg_desc) / sizeof(t_arg_desc)
 				) != EXIT_SUCCESS
 			)
 				error_fatal(PROGRAM_NAME);
@@ -104,7 +62,7 @@ int main(int p_argc, char **p_argv) {
 					NULL,
 					NULL, 0,
 					PROGRAM_SEQS_DESC,
-					seq_desc, sizeof(seq_desc) / sizeof(t_arg_desc)
+					seq_desc, sizeof(g_seq_desc) / sizeof(t_arg_desc)
 				) != EXIT_SUCCESS
 			)
 				error_fatal(PROGRAM_NAME);

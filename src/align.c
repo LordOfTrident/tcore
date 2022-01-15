@@ -8,19 +8,17 @@
 #include "error.h"
 #include "utils.h"
 
-#define CHUNK_SIZE 4
-
 #define PROGRAM_NAME "align"
 #define PROGRAM_DESC "Align words from piped input split by spaces or new lines.\n"\
                      "The ' characters marks the start/end of a string. In a\n"\
                      "string, all characters, except new line characters which\n"\
                      "will cut the string off, are taken as a single word."
 
-const char *usages[] = {
+const char *g_usages[] = {
 	"[IGNORED_ARGS...]"
 };
 
-t_arg_desc arg_desc[] = {
+t_arg_desc g_arg_desc[] = {
 	{"--help",    "Show command help"},
 	{"--version", "Show tcore version"}
 };
@@ -34,9 +32,9 @@ int main(int p_argc, const char **p_argv) {
 			if (
 				help(
 					PROGRAM_NAME,
-					usages, sizeof(usages) / sizeof(const char*),
+					g_usages, sizeof(g_usages) / sizeof(const char*),
 					PROGRAM_DESC,
-					arg_desc, sizeof(arg_desc) / sizeof(t_arg_desc)
+					g_arg_desc, sizeof(g_arg_desc) / sizeof(t_arg_desc)
 				) != EXIT_SUCCESS
 			)
 				error_fatal(PROGRAM_NAME);

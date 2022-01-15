@@ -4,8 +4,8 @@ DEPS = ${wildcard src/*.h}
 BIN  = ${subst src/,bin/,${basename ${SRC}}}
 
 VERSION_MAJOR = 2
-VERSION_MINOR = 8
-VERSION_PATCH = 3
+VERSION_MINOR = 9
+VERSION_PATCH = 6
 
 CC = cc
 CVER = c99
@@ -31,6 +31,10 @@ ${BIN}: bin/% : src/%.c ${DEPS} ${SPECIAL}
 clean:
 	rm ${BIN}
 
+install: ${BIN}
+
+
 all:
 	@echo compile
 	@echo clean
+	@echo install

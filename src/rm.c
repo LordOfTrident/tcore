@@ -15,11 +15,11 @@
 #define PROGRAM_DESC "Remove a file or a directory. By default, rm cant remove\n"\
                      "directories, because recursive deletion is disabled."
 
-const char *usages[] = {
+const char *g_usages[] = {
 	"[-r] FILE..."
 };
 
-t_arg_desc arg_desc[] = {
+t_arg_desc g_arg_desc[] = {
 	{"--help",    "Show command help"},
 	{"--version", "Show tcore version"},
 	{"-r",        "Remove contents of directories recursively"}
@@ -74,9 +74,9 @@ int main(int p_argc, const char **p_argv) {
 			if (
 				help(
 					PROGRAM_NAME,
-					usages, sizeof(usages) / sizeof(const char*),
+					usages, sizeof(g_usages) / sizeof(const char*),
 					PROGRAM_DESC,
-					arg_desc, sizeof(arg_desc) / sizeof(t_arg_desc)
+					arg_desc, sizeof(g_arg_desc) / sizeof(t_arg_desc)
 				) != EXIT_SUCCESS
 			)
 				error_fatal(PROGRAM_NAME);

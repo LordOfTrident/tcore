@@ -168,6 +168,7 @@ int main(int p_argc, char **p_argv) {
 						ERR_SET_G_ERROR(*p_argv, "Invalid signal", ERR_NOT_FATAL);
 						error_simple(PROGRAM_NAME);
 						error_cleanup();
+						try(PROGRAM_NAME);
 						exitcode = EXIT_FAILURE;
 					}
 				} else {
@@ -175,6 +176,7 @@ int main(int p_argc, char **p_argv) {
 					if (signal == EXIT_FAILURE_BELOWZERO) {
 						error_simple(PROGRAM_NAME);
 						error_cleanup();
+						try(PROGRAM_NAME);
 						exitcode = EXIT_FAILURE;
 					} else
 						printf("%i\n", signal);
@@ -194,6 +196,7 @@ int main(int p_argc, char **p_argv) {
 				ERR_SET_G_ERROR(p_argv[2], "Invalid signal", ERR_NOT_FATAL);
 				error_simple(PROGRAM_NAME);
 				error_cleanup();
+				try(PROGRAM_NAME);
 				return EXIT_FAILURE;
 			}
 
@@ -204,6 +207,7 @@ int main(int p_argc, char **p_argv) {
 				ERR_SET_G_ERROR(p_argv[2], "Invalid signal", ERR_NOT_FATAL);
 				error_simple(PROGRAM_NAME);
 				error_cleanup();
+				try(PROGRAM_NAME);
 				return EXIT_FAILURE;
 			}
 
@@ -222,6 +226,7 @@ int main(int p_argc, char **p_argv) {
 			if (signal == EXIT_FAILURE_BELOWZERO) {
 				error_simple(PROGRAM_NAME);
 				error_cleanup();
+				try(PROGRAM_NAME);
 				return EXIT_FAILURE;
 			}
 
@@ -231,6 +236,7 @@ int main(int p_argc, char **p_argv) {
 			ERR_SET_G_ERROR("Missing argument", NULL, ERR_NOT_FATAL);
 			error_simple(PROGRAM_NAME);
 			error_cleanup();
+			try(PROGRAM_NAME);
 			return EXIT_FAILURE;
 		}
 	}
@@ -240,6 +246,7 @@ int main(int p_argc, char **p_argv) {
 			ERR_SET_G_ERROR(*p_argv, "Expected a pid", ERR_NOT_FATAL);
 			error_simple(PROGRAM_NAME);
 			error_cleanup();
+			try(PROGRAM_NAME);
 			exitcode = EXIT_FAILURE;
 			continue;
 		}
@@ -251,6 +258,7 @@ int main(int p_argc, char **p_argv) {
 			ERR_SET_G_ERROR(str_pid, "Unknown pid", ERR_NOT_FATAL);
 			error_simple(PROGRAM_NAME);
 			error_cleanup();
+			try(PROGRAM_NAME);
 			exitcode = EXIT_FAILURE;
 		}
 	}

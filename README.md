@@ -51,6 +51,7 @@ practice C some more. some of the programs are mostly POSIX compliant while othe
 - uptime
 - yes
 - align
+- ted
 
 ## Usage
 All of the programs recognise `--help` and `--version` arguments. Usage for each program is under the `--help` argument.
