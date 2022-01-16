@@ -90,7 +90,7 @@ char *read_file(const char *p_path) {
 	size_t fsize = ftell(fhnd);
 	fseek(fhnd, 0, SEEK_SET);
 
-	ERR_WATCH; char* fcontent = (char*)emalloc(fsize + 1);
+	char* fcontent = (char*)emalloc(fsize + 1);
 	if (fcontent == NULL)
 		return NULL;
 	for (char *p = fcontent; (*p = getc(fhnd)) != EOF; ++ p);
@@ -129,7 +129,7 @@ int write_file(const char *p_path, const char *p_content, bool p_escaped) {
 
 /* not apart of c99 standard */
 char *strclone(const char *p_str) {
-	char *buf = emalloc(strlen(p_str) + 1);
+	char *buf = (char*)emalloc(strlen(p_str) + 1);
 	if (buf == NULL)
 		return NULL;
 

@@ -49,10 +49,10 @@ int main(int p_argc, const char **p_argv) {
 
 	size_t str_len = 0;
 	size_t str_chunk_size = CHUNK_SIZE;
-	char *str = emalloc(str_chunk_size);
+	char *str = (char*)emalloc(str_chunk_size);
 
 	size_t buf_len = 0;
-	char **buf = emalloc(1);
+	char **buf = (char*)emalloc(1);
 
 	if (str == NULL || buf == NULL)
 		error_fatal(PROGRAM_NAME);
@@ -71,7 +71,7 @@ int main(int p_argc, const char **p_argv) {
 				free(buf);
 				error_fatal(PROGRAM_NAME);
 			}
-			buf = tmp;
+			buf = (char*)tmp;
 
 			++ str_len;
 			if (str_len > str_chunk_size) {
@@ -80,7 +80,7 @@ int main(int p_argc, const char **p_argv) {
 					free(str);
 					error_fatal(PROGRAM_NAME);
 				}
-				str = tmp;
+				str = (char*)tmp;
 			}
 			str[str_len - 1] = 0;
 
@@ -107,7 +107,7 @@ int main(int p_argc, const char **p_argv) {
 					free(str);
 					error_fatal(PROGRAM_NAME);
 				}
-				str = tmp;
+				str = (char*)tmp;
 			}
 			str[str_len - 1] = ch;
 
@@ -122,7 +122,7 @@ int main(int p_argc, const char **p_argv) {
 				free(str);
 				error_fatal(PROGRAM_NAME);
 			}
-			str = tmp;
+			str = (char*)tmp;
 		}
 		str[str_len - 1] = 0;
 
@@ -132,7 +132,7 @@ int main(int p_argc, const char **p_argv) {
 			free(buf);
 			error_fatal(PROGRAM_NAME);
 		}
-		buf = tmp;
+		buf = (char*)tmp;
 
 		buf[buf_len - 1] = str;
 	} else
@@ -140,7 +140,7 @@ int main(int p_argc, const char **p_argv) {
 
 	size_t len = 0;
 	size_t space_len = 0;
-	char *space = emalloc(1);
+	char *space = (char*)emalloc(1);
 	if (space == NULL) {
 		free(buf);
 		error_fatal(PROGRAM_NAME);
@@ -161,7 +161,7 @@ int main(int p_argc, const char **p_argv) {
 			free(space);
 			error_fatal(PROGRAM_NAME);
 		}
-		space = tmp;
+		space = (char*)tmp;
 		memset(space, ' ', space_len);
 		space[space_len] = '\0';
 

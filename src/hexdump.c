@@ -21,12 +21,6 @@ t_arg_desc g_arg_desc[] = {
 
 int hexdump(const char *p_path) {
 	ERR_WATCH_INIT;
-	ERR_WATCH; FILE *fhnd = fopen(p_path, "r");
-	if (fhnd == NULL) {
-		ERR_SET_G_ERROR(p_path, strerror(errno), ERR_NOT_FATAL);
-		return EXIT_FAILURE;
-	}
-
 	struct stat entstat;
 	if (stat(p_path, &entstat) == 0) {
 		if (S_ISDIR(entstat.st_mode) != 0) {
@@ -34,7 +28,13 @@ int hexdump(const char *p_path) {
 			return EXIT_FAILURE;
 		}
 	} else {
-		ERR_SET_G_ERROR("stat fail", strerror(errno), ERR_FATAL);
+		ERR_SET_G_ERROR("stat fail", strerror(errno), ERR_NOT_FATAL);
+		return EXIT_FAILURE;
+	}
+
+	ERR_WATCH; FILE *fhnd = fopen(p_path, "r");
+	if (fhnd == NULL) {
+		ERR_SET_G_ERROR(p_path, strerror(errno), ERR_FATAL);
 		return EXIT_FAILURE;
 	}
 

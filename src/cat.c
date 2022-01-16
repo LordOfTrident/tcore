@@ -46,7 +46,7 @@ int main(int p_argc, const char **p_argv) {
 	if (p_argc < 2) {
 		size_t len = 0;
 		size_t chunk_size = CHUNK_SIZE;
-		char *buf = emalloc(chunk_size);
+		char *buf = (char*)emalloc(chunk_size);
 		if (buf == NULL)
 			error_fatal(PROGRAM_NAME);
 
@@ -60,7 +60,7 @@ int main(int p_argc, const char **p_argv) {
 					free(buf);
 					error_fatal(PROGRAM_NAME);
 				}
-				buf = tmp;
+				buf = (char*)tmp;
 			}
 
 			buf[len - 1] = ch;
@@ -74,7 +74,7 @@ int main(int p_argc, const char **p_argv) {
 					free(buf);
 					error_fatal(PROGRAM_NAME);
 				}
-				buf = tmp;
+				buf = (char*)tmp;
 			}
 		}
 		buf[len] = '\0';

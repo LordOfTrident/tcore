@@ -40,7 +40,7 @@ int remove_dir(const char *p_path) {
 			continue;
 
 		size_t len = path_len + strlen(dirent->d_name) + 2;
-		char *path = emalloc(len);
+		char *path = (char*)emalloc(len);
 		if (path == NULL)
 			return EXIT_FAILURE;
 
