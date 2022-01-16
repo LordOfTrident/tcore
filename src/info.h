@@ -1,5 +1,5 @@
-#ifndef VERSION_H__HEADER_GUARD__
-#define VERSION_H__HEADER_GUARD__
+#ifndef INFO_H__HEADER_GUARD__
+#define INFO_H__HEADER_GUARD__
 
 #include <stdio.h> /* printf, putchar */
 #include <string.h> /* strlen, strchr */
@@ -99,4 +99,4 @@ static inline void try(const char* p_prog_name) {
 	printf("Try '%s --help' for usage\n", p_prog_name);
 }
 
-#endif /* VERSION_H__HEADER_GUARD__ */
+#endif /* INFO_H__HEADER_GUARD__ */
