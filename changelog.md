@@ -40,3 +40,4 @@ All the versions and the changes they bring
 - `2.8.5`: moved fputse to utils.c
 - `2.8.6`: added write_file to utils.c
 - `2.9.6`: ted added
+- `2.9.7`: improved code
